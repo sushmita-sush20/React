@@ -1,0 +1,105 @@
+1) What is `NPM`?
+A: NPM is a package manager which helps us to install the packages that are required to develop a project.
+   When we initialize the npm in our project package.json file is created.
+   NPM reads our package.json and downloads all the required packages and stores it inside the node_modules.
+   - node_modules is the folder where npm stores all the dependencies our project needs to run.
+
+2) What is `Parcel/Webpack`? Why do we need it?
+A: Parcel/Webpack are bundlers, Bundlers is a tool that bundles our app, packages our apps so that it can be shipped to production.
+   It helps us in
+   - Bundle JavaScript Modules
+   - Transpile Code(make it Browser-Friendly)
+   - Optimize for performance
+   - Asst Handling(Manages CSS, images,fonts etc)
+   - Development Tools
+
+3) What is `.parcel-cache`?
+A: - parcel-cache codes all the time.
+   - When we run the application, a build is created which takes some time inms.
+   - If we make any code changes and save the application, another build will be triggered which might take even less time than the previous build.
+   - This reduction in time is due to parcel cache.
+   - Parcel immediately loads the code from the cache every time there is a subsequent build.
+   - On the very first build parcel creates a folder .parcel-cache where it stores the caches in binary codeformat.
+   - Parcel gives faster build, faster developer experience beacause of caching.
+
+4) What is `npx` ?
+A: NPX - Node Package Execute
+   - Looks for the command in Node_modules, Global modules, npm registry(if not found locally)
+   - Downloads and runs the package if it is not already available
+   - Temporarily installs the package in a cache if needed
+   - Executes the main entry of the package
+   - Cleans up afterward if the package was not needed again
+
+5)  What is difference between `dependencies` vs `devDependencies`?
+A: dependencies:
+   ------------
+   - These are packages our app needs to run in production.
+   - They are required for the actual functionality of our app.
+    eg: react, react-dom
+   devDependencies:
+   ---------------
+   - These are packages used only during development
+   - They are not needed in production.
+    eg: parcel, jest
+
+6) What is Tree Shaking?
+A: - Tree shaking is a process of removing the unwanted code that we donot use while developing the application.
+   - In computing, tree shaking is a dead code elimination technique that is applied when optimizing code.
+
+7) What is Hot Module Replacement?
+A: - It means that parcel will keep a track of all files which you are updating.
+   - There are File Watcher Algorithm (written in c++). It keeps track  of all the files which are changing realtime and it tells the server to reload.
+   - These are all done by Parcel.
+
+8) List down your favourite 5 superpowers of Parcel and describe any 3 of them in your
+own words.
+A: i) Hot Module Replacement(HMR)
+   ii) Automatoc Code Splitting
+   iii) Caching for Faster Builds
+   iv) Tree Shaking
+    v) Friendly Error Messages
+
+   Tree Shaking - It automatically removes the unused code from your final bundle. This helps reduce file size and load time, improving performance.
+    Caching for Faster Builds - Parcel caches intermediate results. So, when you build again, it doesn’t redo everything from scratch, which makes rebuilds lightning fast.
+    Friendly Error Messages - Parcel shows clean and detailed error messages with helpful hints, making it easier to fix bugs quickly—even if you're a beginner.
+
+9) What is `.gitignore`? What should we add and not add into it?
+A: .gitignore is a special file used by Git to tell it which files or folders to ignore (i.e., not track or commit) in a Git repository.
+    This is useful for avoiding:
+   - Unnecessary clutter in your repository
+   - Sensitive or machine-specific files
+   - Build outputs or dependencies that can be re-generated
+
+   => We should not add source code files like .js, .html, .java etc...
+   => We should add node_modules, .dist etc...
+
+10) What is the difference between `package.json` and `package-lock.json`
+A:  In package. json we have information about generic version
+of installed packages whereas in package.lock.json we have
+information about the specific or exact version of
+installed packages.
+
+11) Why should I not modify `package-lock.json`?
+A:  - package-lock.json is generated and updated automatically by npm whenever you install, remove, or update packages.
+    - Manual edits can break the internal structure, making it invalid or causing install issues.
+    - It locks exact versions of all dependencies and their sub-dependencies.
+    - Manual changes may cause version mismatches, leading to bugs or different behavior across systems
+
+12)  What is `node_modules` ? Is it a good idea to push that on git?
+A:  - Which gets installed is like a database for the npm.
+    - Every dependency in node_module will have its package.json.
+    - Node modules are very heavy so we should always put this in git ignore.
+    - It is not recommended to push it on git.
+
+13) What is the `dist` folder?
+A:  - It keeps the files minified for us.
+    - When bundler builds the app, the build goes into a folder
+called dist.
+    - The `/dist` folder contains the minimized and optimised
+version the source code.
+    - Along with the minified code, the /dist folder also comprises of all the compiled modules that may or may not be used with other systems.
+
+14) What is `browserlists`
+A:  - Browserslist is a tool that specifies which browsers should be supported/compatible in your frontend app.
+    - It makes our code compatible for a lot of browsers.
+
