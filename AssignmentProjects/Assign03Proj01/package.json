@@ -1,0 +1,19 @@
+{
+  "name": "assign03proj01",
+  "version": "1.0.0",
+  "description": "This is Assignment03 project01",
+  "scripts": {
+    "parcel": "parcel",
+    "dev": "parcel index.html",
+    "test": "jest"
+  },
+  "author": "Developer",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
