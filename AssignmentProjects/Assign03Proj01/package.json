@@ -15,5 +15,10 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+  },
+  "main": "App01.js",
+  "repository": {
+    "type": "git",
+    "url": "/OneDrive/Desktop/React/AssignmentProjects/Assign03Proj01"
   }
 }

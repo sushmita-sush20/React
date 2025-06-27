@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is React",
   "scripts": {
+    "assign03Proj02": "parcel AssignmentProjects/Assign03Proj02/index.html",
     "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "jest"
@@ -19,7 +20,7 @@
   },
   "homepage": "https://github.com/sushmita-sush20/React#readme",
   "devDependencies": {
-    "parcel": "^2.15.2"
+    "parcel": "^2.15.4"
   },
   "dependencies": {
     "react": "^19.1.0",
