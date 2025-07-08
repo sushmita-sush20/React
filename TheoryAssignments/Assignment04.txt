@@ -1,0 +1,195 @@
+1)  Is JSX mandatory for React?
+A: No, JSX is not mandatory for React — but it is highly recommended because it makes the code more readable and easier to work with.
+
+2) Is ES6 mandatory for React?
+A: - No, ES6 is not strictly mandatory for React — but in practice, it is strongly recommended and widely used because it simplifies code and enables modern JavaScript features that pair very well with React.
+   - React was designed to be modern, and ES6 offers many features that make React code cleaner, shorter, and more readable.
+
+3) {TitleComponent} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX?
+A: 1. {TitleComponent}
+   - This refers to the function or class itself — not the result of calling it.
+   - You're passing the component as a reference, not rendering it.  
+  eg: const TitleComponent = () => <h1>Hello</h1>;
+        const Wrapper = () => {
+           return (
+              <div>
+               {TitleComponent} {/* ❌ NOT rendered */}
+              </div>
+         );
+      };
+
+    2. {<TitleComponent />}
+    - This renders the component.
+    - Equivalent to calling TitleComponent() and embedding its returned JSX into the DOM.
+    eg: const TitleComponent = () => <h1>Hello</h1>;
+           const Wrapper = () => {
+               return (
+                 <div>
+                   {<TitleComponent />} {/* ✅ Renders <h1>Hello</h1> */}
+                </div>
+             );
+           };
+
+    3. {<TitleComponent></TitleComponent>}
+    - This is exactly the same as {<TitleComponent />}.
+    - Just a different syntax (useful when the component has children).
+    eg: const TitleComponent = ({ children }) => <h1>{children}</h1>;
+         const Wrapper = () => {
+            return (
+              <div>
+                {<TitleComponent>Welcome</TitleComponent>} {/* ✅ Renders <h1>Welcome</h1> */}
+              </div>
+            );
+         };
+A:
+4) How can I write comments in JSX?
+A: 1. Inside JSX (i.e., inside return)
+   Use {/* comment here */} — this is the only valid syntax inside JSX tags.
+   eg1: return (
+         <div>
+            {/* This is a comment inside JSX */}
+            <h1>Hello World</h1>
+         </div>
+       );
+    eg2: return (
+            <div>
+              // ❌ This will throw an error!
+              <h1>Hello</h1>
+            </div>
+          );
+    2. Outside JSX (i.e., in JavaScript scope)
+    Use // or /* */ as usual.   
+    eg: // This is a comment outside JSX
+        const name = "React";
+        /* Another comment */
+        return (
+            <div>
+              <h1>Hello {name}</h1>
+            </div>
+        );
+
+5) What is <React.Fragment></React.Fragment> and <></>?
+A: In React, both <React.Fragment></React.Fragment> and shorthand <></> are used to group multiple elements without adding extra nodes to the DOM.
+
+   1. <React.Fragment></React.Fragment>
+   - This is the explicit form of a fragment.
+   - It behaves like a container but doesn't render any HTML element in the DOM.  
+   eg: return (
+          <React.Fragment>
+            <h1>Title</h1>
+            <p>Description</p>
+          </React.Fragment>
+        );
+
+    Output: <h1>Title</h1>
+            <p>Description</p>
+
+     2. <> </>
+     - This is the shorthand syntax for React.Fragment.
+     - Works exactly the same, but only for basic fragments. 
+     eg: return (
+           <>
+             <h1>Title</h1>
+             <p>Description</p>
+           </>
+        );
+
+         Note: You cannot add key or other props with the shorthand syntax.
+
+          For example:
+          <>
+            {/* ❌ This will throw an error if you need to use 'key' */}
+          </>
+
+6) What is Virtual DOM?
+A: - The Virtual DOM (VDOM) is a lightweight copy of the real DOM (Document Object Model).
+   - It’s a JavaScript object representation of the actual DOM.
+   - React uses it to figure out the minimal changes needed to update the UI efficiently.
+
+7) What is Reconciliation in React?
+A: Reconciliation is the process React uses to:
+   - Compare the old Virtual DOM with the new Virtual DOM
+   - Figure out what changed
+   - Update only those changes in the real DOM 
+
+8) What is React Fiber?
+A: React Fiber is the new engine inside React (since React 16) that helps React:
+   - Update the screen faster and smoother
+   - Handle animations and complex updates better
+   - Pause, continue, cancel, and reuse work — like a smart multitasker 
+
+9) Why we need keys in React? When do we need keys in React?
+A: Keys are like name tags you give to elements in a list, so React can tell them apart.
+   React uses keys to:
+   - Identify each item in a list.
+   - Track which items changed, were added, or removed.
+   - Update the list efficiently without re-rendering everything.  
+
+   You need keys when you are rendering a list of elements dynamically, like using .map().
+   eg: const fruits = ["Apple", "Banana", "Cherry"];
+       return (
+         <ul>
+           {fruits.map((fruit, index) => (
+              <li key={index}>{fruit}</li>  // ✅ key is needed here
+            ))}
+         </ul>
+        );
+
+10)  Can we use index as keys in React?
+A:   Yes, you can use index as a key — But you shouldn’t in most cases.
+
+     Using index as a key can cause bugs, especially when:
+     - The list can change (items added, removed, reordered)
+     - The list contains editable items (like input fields)
+
+     React tracks elements by their key. If keys don't match correctly:
+     - The wrong items may get updated
+     - Inputs can lose focus
+     - Animations may break
+     - React might not update the UI properly
+
+     Use index as key only when:
+     - The list is static (no changes)
+     - Items are never reordered or deleted
+     - You don’t have a unique ID for the items
+
+11) What is props in React? Ways to use or pass them?
+A:  Props (short for properties) are like function arguments.
+    - They are used to pass data from a parent component to a child component.
+    - Props help make your components reusable and customizable.
+
+    Destructuring Props:
+    eg: Instead of this:
+        function Greet(props) {
+          return <h1>Hello, {props.name}</h1>;
+        }
+
+        You can do:
+        function Greet({ name }) {
+          return <h1>Hello, {name}</h1>;
+        }
+
+12) What is a Config Driven UI ?
+A: A Config Driven UI means building your user interface (UI) based on a configuration object or data, instead of writing a lot of hardcoded HTML/JSX.
+
+   eg: So, instead of writing:
+       <input type="text" placeholder="Enter Name" />
+
+       You define it like this:
+       const formConfig = [
+         { type: "text", placeholder: "Enter Name" },
+       ];
+
+       Then use a loop to generate UI from the config:
+       {formConfig.map((field) => (
+          <input type={field.type} placeholder={field.placeholder} />
+       ))}
+
+    So basically, Config Driven UI means your UI is created from data, not manually written line by line.
+
+        
+
+
+
+
+  
