@@ -186,3 +186,10 @@ A: A Config Driven UI means building your user interface (UI) based on a configu
        ))}
 
     So basically, Config Driven UI means your UI is created from data, not manually written line by line.
+
+        
+
+
+
+
+  
