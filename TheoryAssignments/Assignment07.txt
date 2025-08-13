@@ -1,0 +1,175 @@
+Assignment07
+------------
+
+1) What are various ways to add images into our App? Explain with code examples
+A: In React (or any JavaScript-based front-end app), you can add images in several ways depending on where the images come from.
+
+   Here’s a clear breakdown with examples:
+
+   1. Importing Local Images (Best for static assets):
+      ------------------------------------------------
+      If the image is inside your project folder (e.g., src/assets), you can import it like any JavaScript file.
+
+     Ex: import React from "react";
+         import logo from "./assets/logo.png"; // local image
+
+         function App() {
+           return (
+             <div>
+               <h1>Local Image</h1>
+               <img src={logo} alt="Logo" />
+             </div>
+           );
+          }
+
+        export default App;
+
+      Pros: Image is bundled with your app, so no broken links.
+      Cons: Increases bundle size if too many image.
+
+   2. Using the public Folder:
+      ------------------------
+       Place your image in the public folder and reference it directly by path.
+      
+      Ex: Project Structure:
+          ------------------
+              public/
+               └── images/
+                     └── hero.png
+
+         function App() {
+           return (
+             <div>
+               <h1>Public Folder Image</h1>
+               <img src="/images/hero.png" alt="Hero" />
+             </div>
+            );
+           }
+
+         export default App;
+
+        Pros: No import needed, URL stays same.
+        Cons: Images aren’t processed by Webpack — can’t use version hashing for cache-busting.
+
+   3. Using Online Image URLs:
+      ------------------------
+        If the image is hosted on a server or CDN, you can directly use its URL.
+ 
+       Ex: function App() {
+             return (
+               <div>
+                 <h1>External Image</h1>
+                 <img src="https://via.placeholder.com/150" alt="Placeholder" />
+               </div>
+             );
+            }
+
+           export default App;
+
+        Pros: No storage in your project, faster CDN load.
+        Cons: If the external URL changes or is removed, image will break.
+
+      
+   4. Dynamically Rendering Images from Data:
+      ---------------------------------------
+      Useful when your image paths are coming from APIs or arrays.
+
+      Ex: const images = [
+            { id: 1, src: "/images/pic1.png", alt: "Picture 1" },
+            { id: 2, src: "/images/pic2.png", alt: "Picture 2" },
+          ];
+
+          function App() {
+            return (
+              <div>
+                <h1>Dynamic Images</h1>
+                {images.map((img) => (
+                  <img key={img.id} src={img.src} alt={img.alt} />
+               ))}
+              </div>
+            );
+          }
+
+         export default App;
+
+   5. Using require() (Older Way):
+      ----------------------------
+      Some projects use require() for dynamic imports.
+
+      Ex: function App() {
+            return (
+              <div>
+                <h1>Require Image</h1>
+                <img src={require("./assets/logo.png")} alt="Logo" />
+              </div>
+            );
+           }
+
+         export default App;
+
+     - Works well in older setups without ES module imports.
+
+2) What would happen if we do console.log(useState())?
+A: 1. useState() always returns an array with 2 items:
+      First item → current state value
+      Second item → function to update the state
+
+   Ex: const [value, setValue] = useState("Hello"); // ["Hello", ƒ]  → first is value, second is setValue function
+
+   2. If no initial value is passed
+      If you call useState() without an argument:
+
+   Ex: console.log(useState()); //[undefined, ƒ]
+        
+       beacause:
+         - State starts as undefined
+         - Second item is still the updater function
+
+   3. It only works inside a component
+      If you try console.log(useState()) outside a React function component (like at the top of a file), React will throw:
+
+      Error: Invalid hook call. Hooks can only be called inside of the body of a function component.
+
+      In short:
+      ---------
+        - useState() returns [stateValue, setStateFunction].
+        - If you don’t pass an initial value → stateValue will be undefined.
+
+3) How will useEffect behave if we don't add a dependency array ?
+A: If we don’t add a dependency array in useEffect, it will run after every render of the component — both the first time (mount) and every time it re-renders.
+
+4) What is SPA?
+A: A SPA (Single Page Application) is a type of web app that loads just one HTML page and then updates the content dynamically using JavaScript, without fully reloading the page.
+
+   - It is just one page and just the components getting interchanged via client side Routing.
+
+   Ex: Gmail, Facebook, Twitter — when you click around, the page doesn’t refresh completely; only parts of it change.
+
+   Why it’s useful:
+   ----------------
+      > Faster – no full page reload.
+      > Better user experience – feels like an app, not a slow website.
+      > Less data usage – only new data is fetched, not the whole page.
+
+5) What is difference between Client Side Routing and Server Side Routing?
+A: 1. Server-Side Routing (SSR):
+     ---------------------------
+      - Every time you click a link, the browser sends a request to the server.
+      - The server builds a new HTML page and sends it back.
+      - Full page reload happens.
+
+    Ex: Click link → Server sends new HTML → Browser reloads
+
+
+   2. Client-Side Routing (CSR):
+      --------------------------
+      - Only one HTML page is loaded at the start.
+      - JavaScript (e.g., React Router) changes the URL and updates the content without asking the server for a new page.
+      - No full page reload — it feels faster.
+  
+    Ex: Click link → JS changes view instantly → No page reload
+
+   Quick Analogy:
+   -------------
+    - Server-Side Routing:- Like ordering food every time you’re hungry — the kitchen cooks from scratch.
+    - Client-Side Routing:- Like a buffet — all food is ready, you just pick what you want without waiting.

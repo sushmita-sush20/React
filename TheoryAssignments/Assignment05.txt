@@ -1,0 +1,86 @@
+Assignment05
+------------
+
+1) What is the difference between Named Export, Default export and * as export?
+A: Named Export:
+   ------------
+   - You export multiple specific values by name.
+   - Can have many named exports in a file.
+   - Import must use the exact same name (case-sensitive) inside {}. 
+
+   Ex: // math.js
+       export const add = (a, b) => a + b;
+       export const subtract = (a, b) => a - b;
+
+       import { add, subtract } from './math.js';
+       console.log(add(2, 3));
+
+   Default export:
+   --------------
+   - One default export per file.
+   - Can be a function, class, object, or value.
+   - Import name can be anything — no {}.
+
+   Ex: // math.js
+       export default function multiply(a, b) {
+         return a * b;
+       }
+
+      import mul from './math.js';
+       console.log(mul(2, 3));
+
+    * as Export (Namespace Import):
+    -------------------------------
+    - Imports everything from a file into a single object.
+    - Each export becomes a property of that object.
+
+    Ex: // math.js
+      export const add = (a, b) => a + b;
+      export const subtract = (a, b) => a - b;
+      export default function multiply(a, b) {
+        return a * b;
+      }
+
+      import * as math from './math.js';
+
+      console.log(math.add(2, 3));      // 5
+      console.log(math.subtract(5, 2)); // 3
+      console.log(math.default(2, 3));  // 6 (default export is accessed 
+      as .default) 
+
+2) What is the importance of config.js file
+A: A config.js file is basically your project’s settings hub — it stores 
+   configuration values that your app might need, instead of hardcoding 
+   them inside your main code.
+   Think of it like keeping all the “things you might change later” in one 
+   place.
+
+3) What are React Hooks?
+A: React Hooks are special functions in React that let you use features like 
+   state and lifecycle methods in your function components, without needing 
+   to write a class.
+
+   Think of them as shortcuts that make your code simpler and easier to 
+   manage.
+
+   Ex: useState → lets your component remember values
+
+   useEffect → lets your component run code at certain times (like when it 
+   loads)
+
+4) Why do we need a useState Hook?
+A: We need the useState hook in React so that a component can remember and 
+   update data while it’s running.
+
+   Without it, a function component would forget everything each time it 
+   re-renders.
+
+   Ex: You have a counter button.
+
+   Without useState, clicking the button would never change the number
+   on the screen.
+
+   With useState, React stores that number and updates it whenever you click.
+
+   It’s like giving your component a notepad to keep track of things between 
+   renders.
